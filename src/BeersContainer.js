@@ -7,7 +7,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 import IconDelete from '@material-ui/icons/Delete';
 import Typography from '@material-ui/core/Typography';
 
-
 import { restUrl } from './config';
 class BeersContainer extends Component {
 
