@@ -3,19 +3,25 @@ import React, { Component } from 'react';
 class UsersContainer extends Component {
 
   state = {
-    users: {
-      results: []
-    }
+    beers: []
   }
 
   fetchUsers() {
-    fetch('https://randomuser.me/api/?results=10')
+    fetch('https://beers-bunkier.firebaseapp.com/api/v1/beers/')
     .then(response => {
       console.log(response.status);
       return response.json();
     })
     .then(data => {
-      this.setState({ users: data });
+      const beersArray = [];
+      Object.entries(data.beers).forEach(elem => {
+        const newBeer = {
+          id: elem[0],
+          ...elem[1]
+        }
+        beersArray.push(newBeer);
+      });
+      this.setState({ beers: beersArray });
     });
   }
 
@@ -26,9 +32,9 @@ class UsersContainer extends Component {
   render() {
     return(
       <div>
-        <h1>My users:</h1>
-        {this.state.users.results.map(user => {
-          return <p key={`user-${user.id}`}>{user.name.first}</p>
+        <h1>My beers:</h1>
+        {this.state.beers.map(beer => {
+          return <p key={`beer-${beer.id}`}>{beer.name}</p>
         })}
       </div>
     );
