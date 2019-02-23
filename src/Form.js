@@ -13,27 +13,54 @@ class Form extends Component {
   }
 
   handleSubmit = () => {
+    // Create:
     // POST https://beers-bunkier.firebaseapp.com/api/v1/beers
     // data: this.state
 
-    fetch('https://beers-bunkier.firebaseapp.com/api/v1/beers', {
-      method: 'POST',
-      body: JSON.stringify(this.state)
-    });
+    // Update:
+    // POST https://beers-bunkier.firebaseapp.com/api/v1/beers/:beerId
+    // data: this.state
 
+    const beerId = this.props.match.params.beerId;
+    if (beerId) {
+      fetch(`https://beers-bunkier.firebaseapp.com/api/v1/beers/${beerId}`, {
+        method: 'PATCH',
+        body: JSON.stringify(this.state)
+      });
+    } else {
+      fetch('https://beers-bunkier.firebaseapp.com/api/v1/beers', {
+        method: 'POST',
+        body: JSON.stringify(this.state)
+      });
+    }
+  }
+
+  componentDidMount() {
+    const beerId = this.props.match.params.beerId;
+    if (beerId) {
+      fetch(`https://beers-bunkier.firebaseapp.com/api/v1/beers/${beerId}`)
+      .then(response => response.json())
+      .then(data => {
+        this.setState({
+          name: data.name,
+          description: data.description,
+          imageUrl: data.imageUrl
+        });
+      });
+    }
   }
 
   render() {
     return (
       <div>
         <div>
-          Name: <input onChange={this.handleChange} type="text" name="name" />
+          Name: <input defaultValue={this.state.name} onChange={this.handleChange} type="text" name="name" />
         </div>
         <div>
-          Description: <input onChange={this.handleChange} type="text" name="description" />
+          Description: <input defaultValue={this.state.description} onChange={this.handleChange} type="text" name="description" />
         </div>
         <div>
-          Image url: <input onChange={this.handleChange} type="text" name="imageUrl" />
+          Image url: <input defaultValue={this.state.imageUrl} onChange={this.handleChange} type="text" name="imageUrl" />
         </div>
         <div>
           <button onClick={this.handleSubmit}>Send</button>
