@@ -66,11 +66,11 @@ class BeersContainer extends Component {
             <ListItem key={`beer-${beer.id}`} button>
               <ListItemText
                 primary={
-                  <Link to={`/beer/${beer.id}`}>{beer.name}</Link>
+                  <span>
+                    <Link to={`/beer/${beer.id}`}>{beer.name}</Link> | <Link to={`/update/${beer.id}`}>Edit</Link>
+                  </span>
                 }
-                secondary={
-                  <Link to={`/update/${beer.id}`}>Edit</Link>
-                }
+                secondary={beer.description}
                />
               <ListItemIcon>
                 <IconDelete onClick={() => this.handleRemove(beer.id)} />

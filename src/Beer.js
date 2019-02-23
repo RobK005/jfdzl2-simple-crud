@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 
 import { restUrl } from './config';
@@ -27,7 +28,12 @@ class Beer extends Component {
         <Typography variant="h4" gutterBottom>
           {beer.name}
         </Typography>
-        <p>{beer.description}</p>
+        <Typography variant="subtitle1" gutterBottom>
+          {beer.description}
+        </Typography>
+        <div>
+          <Link to="/">Back to list</Link>
+        </div>
       </div>
     );
   }
