@@ -3,17 +3,13 @@ import React, { Component } from 'react';
 class UsersContainer extends Component {
 
   state = {
-    users: [{
-      id: 1,
-      name: 'Ala'
-    }, {
-      id: 2,
-      name: 'Bogdan'
-    }]
+    users: {
+      results: []
+    }
   }
 
   fetchUsers() {
-    fetch('https://randomuser.me/api/')
+    fetch('https://randomuser.me/api/?results=10')
     .then(response => {
       console.log(response.status);
       return response.json();
@@ -23,12 +19,16 @@ class UsersContainer extends Component {
     });
   }
 
+  componentDidMount() {
+    this.fetchUsers();
+  }
+
   render() {
     return(
       <div>
         <h1>My users:</h1>
-        {this.state.users.map(user => {
-          return <p key={`user-${user.id}`}>{user.name}</p>
+        {this.state.users.results.map(user => {
+          return <p key={`user-${user.id}`}>{user.name.first}</p>
         })}
       </div>
     );
