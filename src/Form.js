@@ -64,11 +64,12 @@ class Form extends Component {
             margin="normal"
             variant="outlined"
             fullWidth
+            required
             name="name" />
         </div>
         <div>
           <TextField
-            label="description"
+            label="Description"
             defaultValue={this.state.description}
             onChange={this.handleChange}
             margin="normal"
