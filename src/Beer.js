@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Typography from '@material-ui/core/Typography';
+
 import { restUrl } from './config';
 class Beer extends Component {
 
@@ -22,7 +24,9 @@ class Beer extends Component {
     const { beer } = this.state;
     return (
       <div>
-        <h1>{beer.name}</h1>
+        <Typography variant="h4" gutterBottom>
+          {beer.name}
+        </Typography>
         <p>{beer.description}</p>
       </div>
     );

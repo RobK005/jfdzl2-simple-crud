@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import IconDelete from '@material-ui/icons/Delete';
+import Typography from '@material-ui/core/Typography';
+
+
 import { restUrl } from './config';
 class BeersContainer extends Component {
 
@@ -47,17 +55,31 @@ class BeersContainer extends Component {
   render() {
     return(
       <div>
-        <h1>My beers:</h1>
-        <h2><Link to="/create">+ Create new</Link></h2>
+        <Typography variant="h3" gutterBottom>
+          My beers:
+        </Typography>
+        <Typography variant="h4" gutterBottom>
+          <Link to="/create">+ Create new</Link>
+        </Typography>
+        <List>
         {this.state.beers.map(beer => {
           return (
-            <p key={`beer-${beer.id}`}>
-              <Link to={`/beer/${beer.id}`}>{beer.name}</Link>
-              <Link to={`/update/${beer.id}`}><button>Edit</button></Link>
-              <button onClick={() => this.handleRemove(beer.id)}>Remove</button>
-            </p>
+            <ListItem key={`beer-${beer.id}`} button>
+              <ListItemText
+                primary={
+                  <Link to={`/beer/${beer.id}`}>{beer.name}</Link>
+                }
+                secondary={
+                  <Link to={`/update/${beer.id}`}>Edit</Link>
+                }
+               />
+              <ListItemIcon>
+                <IconDelete onClick={() => this.handleRemove(beer.id)} />
+              </ListItemIcon>
+            </ListItem>
           );
         })}
+        </List>
       </div>
     );
   }

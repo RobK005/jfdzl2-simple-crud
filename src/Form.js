@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+
 import { restUrl } from './config';
 class Form extends Component {
 
@@ -54,16 +57,39 @@ class Form extends Component {
     return (
       <div>
         <div>
-          Name: <input defaultValue={this.state.name} onChange={this.handleChange} type="text" name="name" />
+          <TextField
+            label="Name"
+            defaultValue={this.state.name}
+            onChange={this.handleChange}
+            margin="normal"
+            variant="outlined"
+            fullWidth
+            name="name" />
         </div>
         <div>
-          Description: <input defaultValue={this.state.description} onChange={this.handleChange} type="text" name="description" />
+          <TextField
+            label="description"
+            defaultValue={this.state.description}
+            onChange={this.handleChange}
+            margin="normal"
+            variant="outlined"
+            fullWidth
+            name="description" />
         </div>
         <div>
-          Image url: <input defaultValue={this.state.imageUrl} onChange={this.handleChange} type="text" name="imageUrl" />
+          <TextField
+            label="Image URL"
+            defaultValue={this.state.imageUrl}
+            onChange={this.handleChange}
+            margin="normal"
+            variant="outlined"
+            fullWidth
+            name="imageUrl" />
         </div>
         <div>
-          <button onClick={this.handleSubmit}>Send</button>
+          <Button onClick={this.handleSubmit} variant="contained" color="primary">
+            Send
+          </Button>
         </div>
       </div>
     );
