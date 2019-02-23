@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-
+import { restUrl } from './config';
 class BeersContainer extends Component {
 
   state = {
@@ -8,7 +8,7 @@ class BeersContainer extends Component {
   }
 
   removeBeer = (beerId) => {
-    const url = `https://beers-bunkier.firebaseapp.com/api/v1/beers/${beerId}`;
+    const url = `${restUrl}/beers/${beerId}`;
     fetch(url, {
       method: 'DELETE'
     })
@@ -22,7 +22,7 @@ class BeersContainer extends Component {
   }
 
   fetchBeers() {
-    fetch('https://beers-bunkier.firebaseapp.com/api/v1/beers/')
+    fetch(`${restUrl}/beers/`)
     .then(response => {
       console.log(response.status);
       return response.json();

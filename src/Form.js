@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { restUrl } from './config';
 class Form extends Component {
 
   state = {
@@ -14,21 +14,21 @@ class Form extends Component {
 
   handleSubmit = () => {
     // Create:
-    // POST https://beers-bunkier.firebaseapp.com/api/v1/beers
+    // POST https://beers-api-sa.firebaseapp.com/api/v1/beers
     // data: this.state
 
     // Update:
-    // POST https://beers-bunkier.firebaseapp.com/api/v1/beers/:beerId
+    // POST https://beers-api-isa.firebaseapp.com/api/v1/beers/:beerId
     // data: this.state
 
     const beerId = this.props.match.params.beerId;
     if (beerId) {
-      fetch(`https://beers-bunkier.firebaseapp.com/api/v1/beers/${beerId}`, {
+      fetch(`${restUrl}/beers/${beerId}`, {
         method: 'PATCH',
         body: JSON.stringify(this.state)
       });
     } else {
-      fetch('https://beers-bunkier.firebaseapp.com/api/v1/beers', {
+      fetch(`${restUrl}/beers`, {
         method: 'POST',
         body: JSON.stringify(this.state)
       });
@@ -38,7 +38,7 @@ class Form extends Component {
   componentDidMount() {
     const beerId = this.props.match.params.beerId;
     if (beerId) {
-      fetch(`https://beers-bunkier.firebaseapp.com/api/v1/beers/${beerId}`)
+      fetch(`${restUrl}/beers/${beerId}`)
       .then(response => response.json())
       .then(data => {
         this.setState({

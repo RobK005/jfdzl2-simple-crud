@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { restUrl } from './config';
 class Beer extends Component {
 
   state = {
@@ -11,7 +11,7 @@ class Beer extends Component {
 
   componentDidMount() {
     const beerId = this.props.match.params.beerId;
-    fetch(`https://beers-bunkier.firebaseapp.com/api/v1/beers/${beerId}`)
+    fetch(`${restUrl}/beers/${beerId}`)
     .then(response => response.json())
     .then(data => {
       this.setState({ beer: data });
