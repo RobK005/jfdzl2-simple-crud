@@ -48,10 +48,12 @@ class BeersContainer extends Component {
     return(
       <div>
         <h1>My beers:</h1>
+        <h2><Link to="/create">+ Create new</Link></h2>
         {this.state.beers.map(beer => {
           return (
             <p key={`beer-${beer.id}`}>
-              {beer.name} <Link to={`/update/${beer.id}`}><button>Edit</button></Link>
+              <Link to={`/beer/${beer.id}`}>{beer.name}</Link>
+              <Link to={`/update/${beer.id}`}><button>Edit</button></Link>
               <button onClick={() => this.handleRemove(beer.id)}>Remove</button>
             </p>
           );
