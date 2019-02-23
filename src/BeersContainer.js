@@ -35,7 +35,15 @@ class BeersContainer extends Component {
       return response.json();
     })
     .then(data => {
-      this.setState({ beers: data });
+      const beersArray = [];
+      Object.entries(data.beers).forEach(elem => {
+        const newBeer = {
+          id: elem[0],
+          ...elem[1]
+        }
+        beersArray.push(newBeer);
+      });
+      this.setState({ beers: beersArray });
     });
   }
 
